@@ -37,15 +37,15 @@ Please ensure the value of **"Delimiter"** and **"EndOfLine"** parameters are al
 
 ## Step 4. Customize prompt question to GPT based on your team requirements
 ### Sample 
->  
-Considering the following described context is mainly a problem that happened in Microsoft Azure Cosmos DB and associated services, so most all terms, technology should be correlated and refer to Azure Services. 
-If there is any Errors or Status Code in the following context, please reference to Cosmos DB HTTP Status code (https://learn.microsoft.com/en-us/rest/api/cosmos-db/http-status-codes-for-cosmosdb) to interpret issue. 
-The \"Issue Title\" is '''___replaceWithTitle___''' and \"Issue Description\" provided by customer is following text '''___replaceWithIssueDescription___''' 
-And the support engineer determined the \"Symptom\" is following text '''___replaceWithSymptomstxt___''' 
-DO NOT refer to any information in the following summary include: \"Database name\", \"Collection name\" from both \"Issue Description\" and \"Symptom\". 
-Remove any unknown part from summary. 
-Please provide a straightforward summary to better describe the issue from given \"Issue Description\" and the \"Symptom\" above; ensure removing any personal contact information like name, email address, contact phone number AND account name, database name, container name to protect PRIVACY. 
-The output Summary MUST use a first-person angle to describe the issue. 
+>   
+Considering the following described context is mainly a problem that happened in Microsoft Azure Cosmos DB and associated services, so most all terms, technology should be correlated and refer to Azure Services.  
+If there is any Errors or Status Code in the following context, please reference to Cosmos DB HTTP Status code (https://learn.microsoft.com/en-us/rest/api/cosmos-db/http-status-codes-for-cosmosdb) to interpret issue.  
+The \"Issue Title\" is '''___replaceWithTitle___''' and \"Issue Description\" provided by customer is following text '''___replaceWithIssueDescription___'''  
+And the support engineer determined the \"Symptom\" is following text '''___replaceWithSymptomstxt___'''  
+DO NOT refer to any information in the following summary include: \"Database name\", \"Collection name\" from both \"Issue Description\" and \"Symptom\".  
+Remove any unknown part from summary.  
+Please provide a straightforward summary to better describe the issue from given \"Issue Description\" and the \"Symptom\" above; ensure removing any personal contact information like name, email address, contact phone number AND account name, database name, container name to protect PRIVACY.  
+The output Summary MUST use a first-person angle to describe the issue.  
 
 ## Reference & Demo
 [input-sample.csv](resources/input-sample.csv)  
