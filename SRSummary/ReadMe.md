@@ -48,6 +48,6 @@ Please provide a straightforward summary to better describe the issue from given
 The output Summary MUST use a first-person angle to describe the issue. 
 
 ## Reference & Demo
-[input-sample.csv](resources/input-sample.csv)
-[output-sample.json](resources/output-sample.json)
-![Sample](resources/sample.png)
+[input-sample.csv](resources/input-sample.csv)  
+[output-sample.json](resources/output-sample.json)  
+![Sample](resources/sample.png)  
