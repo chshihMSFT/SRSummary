@@ -1,0 +1,1 @@
+{"IncidentId":"1234567890123456","Title":"This is a sample title","IssueDescription":"encounter 408 in Cosmos DB","Symptomstxt":"customer encountered 408","GPTIssueSummary":"I encountered a 408 error in Azure Cosmos DB. The issue was identified as the customer encountering a timeout issue."}
