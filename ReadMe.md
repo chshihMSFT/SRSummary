@@ -1,4 +1,4 @@
-﻿
+
 ## Step 1. Consider following sample KQL to extract required information from SRs
 
 ```
