@@ -8,6 +8,7 @@ namespace SRSummary
 {
     public class SkillLinks
     {
+        public string SkillName { get; set; }
         public string Link { get; set; }
         public string GPTAbstract { get; set; }
         public int GPTAbstractWordCount { get; set; }
@@ -15,4 +16,9 @@ namespace SRSummary
         public string GPTkeywordsv2 { get; set; }
 
     }
+    public class KeywordsObject
+    {
+        public List<string> keywords { get; set; }
+    }
+
 }
