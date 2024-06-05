@@ -12,6 +12,14 @@ namespace SRSummary
         public string Title { get; set; }
         public string IssueDescription { get; set; }
         public string Symptomstxt { get; set; }
-        public string GPTIssueSummary { get; set; }
+        public GPTIssueSummary GPTOutput { get; set; }
+    }
+
+    public class GPTIssueSummary
+    {
+        public string TitleSummary { get; set; }
+        public string IssueDescriptionSummary { get; set; }
+        public string LLM_Identified_SG { get; set; }
+        public string LLM_Identified_reason { get; set; }
     }
 }
