@@ -1,3 +1,6 @@
+# Operate Mode: GPTSRSummary
+Combining with OpenAI GPT, this program is designed to understand input SR Title and Description to summarize the SR is most relevant to which Skill Group.  
+With the given restrict keywords for each Skill Groups (embedded in prompts), the program will cross check input context to identify the most relevant Skill Group and re-generate a copy of title, description based on the context.
 
 ## Step 1. Consider following sample KQL to extract required information from SRs
 
@@ -51,3 +54,9 @@ The output Summary MUST use a first-person angle to describe the issue.
 [input-sample.csv](SRSummary/resources/input-sample.csv)  
 [output-sample.json](SRSummary/resources/output-sample.json)  
 ![Sample](SRSummary/resources/sample.png)  
+
+<hr>
+
+# Operate Mode: GPTDOCAbstract
+
+(tbd)
