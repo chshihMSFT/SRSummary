@@ -8,8 +8,38 @@ With the given restrict keywords for each Skill Groups (embedded in prompts), th
 let Delimiter = '||:||';
 let EndOfLine = '|:EOL:|';
 AllCloudsSupportIncidentWithReferenceModelJitVNext
+| where SapSupportPathL3 in ('SQL API SDK - NET') 
+    and RootCauseL2 in ('SQL API SDK')
+    and RootCauseL3 in ('.NET & .NET Core')
+| where SupportLanguage in ('en-US')
+//<Start: remove unnecessary PII reserved words >
+| extend
+    Title = replace_regex(Title, @'\{(?:NAME|ADDRESS|PHONE|ALPHANUMERIC|EMAIL|IP|UNC|CREDITCARD|NAME\+NAME|PHONE\+PHONE|ALPHANUMERIC\+IP|ALPHANUMERIC\+EMAIL|ALPHANUMERIC\+PHONE)PII\}', '')
+    , IssueDescription = replace_regex(IssueDescription, @'\{(?:NAME|ADDRESS|PHONE|ALPHANUMERIC|EMAIL|IP|UNC|CREDITCARD|NAME\+NAME|PHONE\+PHONE|ALPHANUMERIC\+IP|ALPHANUMERIC\+EMAIL|ALPHANUMERIC\+PHONE)PII\}', '')
+    , Symptomstxt = replace_regex(Symptomstxt, @'\{(?:NAME|ADDRESS|PHONE|ALPHANUMERIC|EMAIL|IP|UNC|CREDITCARD|NAME\+NAME|PHONE\+PHONE|ALPHANUMERIC\+IP|ALPHANUMERIC\+EMAIL|ALPHANUMERIC\+PHONE)PII\}', '')
+| extend IssueDescription = replace_string(replace_string(replace_string(IssueDescription, @'{ALPHANUMERIC+PHONE+PHONE+PHONE+PHONE+PHONE+PHONEPII}', ''), @'{ALPHANUMERIC+PHONE+IPPII}', ''), @'{ALPHANUMERIC+PHONE+PHONE+PHONE+PHONEPII}', '')
+//<End: remove unnecessary PII reserved words >
+//<Start: filter only those ill-format data and non-necessary records>
+| where IssueDescription !contains @'This support ticket was created specifically to track an Azure chat'
+    and IssueDescription !contains @'[Azure Government]'
+| where IssueDescription contains @'<Start:Agent_Additional_Properties_Do_Not_Edit>' 
+    and IssueDescription contains @'<End:Agent_Additional_Properties_Do_Not_Edit>' 
+| where IssueDescription contains @"Question:" and IssueDescription contains @"Answer:"
+| parse IssueDescription with IssueDescriptionBody '<Start:Agent_Additional_Properties_Do_Not_Edit>' Agent_Additional_Properties_Do_Not_Edit '<End:Agent_Additional_Properties_Do_Not_Edit>' AdditionalInfoIfAny
+| extend IssueDescriptionBody = split(IssueDescriptionBody, 'Answer:')
+| mv-expand IssueDescriptionBody
+| where IssueDescriptionBody !contains 'Question:'
+    and IssueDescriptionBody !contains 'Environment Information'
+| summarize IssueDescriptionBody = strcat_array(make_list(IssueDescriptionBody),'') by IncidentId, Title, Symptomstxt
+| where array_length(split(IssueDescriptionBody, ' ')) > 10
+//<End: filter only those ill-format data >
+| extend
+    Title = trim(@"\s+", Title)
+    , IssueDescriptionBody = trim(@"\s+", IssueDescriptionBody)
+    , Symptomstxt = trim(@"\s+", Symptomstxt)
 | limit 10
-| extend outputCSV = strcat(IncidentId, Delimiter, Title, Delimiter, IssueDescription, Delimiter, Symptomstxt, EndOfLine)
+| order by IncidentId asc
+| extend outputCSV = strcat(IncidentId, Delimiter, Title, Delimiter, IssueDescriptionBody, Delimiter, Symptomstxt, EndOfLine)
 | project outputCSV
 ```
 
